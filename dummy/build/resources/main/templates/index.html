@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Form</title>
+</head>
+<body>
+    <h1>Student Form</h1>
+    <form th:action="@{/submitForm}" method="post">
+    	<label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" name="studentId" th:value="${studentId}" readonly>
+        <p style="color:red">Please Note down this ID for later uses.</p>
+        <br>
+
+        <label for="roll">Roll:</label>
+        <input type="number" id="roll" name="roll" th:value="${roll}" readonly>
+        <br> 
+               
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <label for="dept">Department:</label>
+        <input type="text" id="dept" name="dept" required>
+        <br>
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
+N
