@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="businessEventLandingApp">
+<head>
+<title>BusinessSucks | Event Form</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<style type="text/css">
+h1{
+text-align: center;
+}
+.form-item{
+margin:10px 0 10px 0;
+}
+input{
+padding:10px 5px;
+border-radius: 8px;
+}
+</style>
+</head>
+<body>
+	<div ng-controller="formController" class="container">
+		<h1>{{eventSelected}}</h1>
+		<div class="form-grid">
+		<form>
+			<div ng-repeat="x in formFields" class="form-item">
+				<label>{{x.parameterName}} : </label> 
+				<input ng-if="x.parameterType==='textbox' && x.parameterName==='Name'" type="text" maxlength="{{x.parameterSize}}" ng-model="formData[x.parameterName]"> 
+				<input ng-if="x.parameterType==='textbox' && x.parameterName==='Address'" type="text" maxlength="{{x.parameterSize}}" ng-model="formData[x.parameterName]"> 
+				<input ng-if="x.parameterType==='date'" type="Date" maxlength="{{x.parameterSize}}" ng-model="formData[x.parameterName]">
+				<input ng-if="x.parameterName==='PhoneNo'" type="number" maxlength="{{x.parameterSize}}" ng-model="formData[x.parameterName]">
+				<input ng-if="x.parameterName==='Email'" type="email" maxlength="{{x.parameterSize}}" ng-model="formData[x.parameterName]">
+										
+					
+				<div ng-if="x.parameterType==='radio'">
+					<div ng-switch="x.parameterName">
+						<div ng-switch-when='Gender'>
+							<label>
+							<input name="Gender" type="radio" value="Male">Male</label> 
+							<label>
+							<input name="Gender" type="radio" value="Female">Female</label>
+						</div>
+						<div ng-switch-default>
+							<label>
+							<input name="default" type="radio" value="True">True</label> 
+							<label>
+							<input name="default" type="radio" value="False">False</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		</div>
+		<br><br>
+		<div class="preview-form"><pre>{{formData | json}}</pre></div>
+		<br><br>
+		<div class="submitted-form"></div>
+		
+		
+	</div>
+</body>
+<script>
+	angular.module("businessEventLandingApp", []).controller('formController', 
+			function($scope, $http, $location) {
+			
+				function getParamFromQuery(param) {
+					return (new URLSearchParams(window.location.search).get(param));
+				}
+				
+				$scope.eventSelected = getParamFromQuery("businessEvent");
+				$scope.formFields = [];
+				$scope.formData = {};
+				$http.get("/business/" + $scope.eventSelected).then(
+						function(response) {
+							$scope.formFields = response.data;
+						});
+			});
+</script>
+</html>

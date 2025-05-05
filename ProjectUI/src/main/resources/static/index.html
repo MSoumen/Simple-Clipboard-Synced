@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>BusinessSucks</title>
+<style type="text/css">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7fb;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  color: #4a90e2;
+}
+
+/* Centering and styling buttons */
+.button-container {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.event-btn {
+  margin:10px 0px 10px 0px;
+  font-size: 2rem;
+  padding: 20px 40px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  width: 250px;
+  height: 80px;
+  transition: background-color 0.3s ease;
+}
+
+.event-btn:hover {
+  opacity: 0.9;
+}
+
+.btn-b001 {
+  background-color: #4a90e2;
+}
+
+.btn-b002 {
+  background-color: #7ed321;
+}
+
+.btn-b003 {
+  background-color: #f5a623;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Select Bussiness Event</h1>
+<div class="btn-container">
+<button onclick="openBusinessEvent('B001')" class="event-btn btn-b001">B001</button>
+<button onclick="openBusinessEvent('B002')" class="event-btn btn-b002">B002</button>
+<button onclick="openBusinessEvent('B003')" class="event-btn btn-b003">B003</button>
+</div>
+</div>
+</body>
+<script type="text/javascript">
+function openBusinessEvent(businessEvent){
+	window.location.href="business_event_page.html?businessEvent="+businessEvent;
+	//window.location.href="/business/"+businessEvent;
+}
+</script>
+</html>
